@@ -1,8 +1,7 @@
 import { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
-/* {abc: 5, xyz: 3} */
-const LazyLoad = (importFunc: any) => {
 
+const LazyLoad = (importFunc: any) => {
   const LazyComponent = lazy(() => {
     return new Promise((resolve) => {
       setTimeout(() => {

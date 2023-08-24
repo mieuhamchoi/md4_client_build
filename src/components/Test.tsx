@@ -1,5 +1,7 @@
 export default function Test() {
   return (
-    <div>Hello Mọi Người</div>
+    <div>
+      hello test
+    </div>
   )
 }
