@@ -19,6 +19,7 @@ export default function RouteSetup() {
               <Route path="infor" element={<>Thông Tin</>}></Route>
               {RouteProduct}
             </Route>
+            <Route path="/google" element={<>Thông Tin</>}></Route>
         </Routes>
     </BrowserRouter>
   )
