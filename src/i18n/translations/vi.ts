@@ -1,8 +1,7 @@
 import { I18nType } from "./en";
 
 const data:I18nType = {
-    hello: "Xin chào thế giới!",
-    about: "Về tôi!"
+    createYourAccount: "Đăng ký tài khoản"
 }
 
 export default data

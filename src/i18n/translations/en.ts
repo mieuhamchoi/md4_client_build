@@ -1,6 +1,6 @@
 const data = {
-    hello: "hahahahha",
-    about: "About"
+    /* register */
+    createYourAccount: "Create Your Account"
 }
 export type I18nType = typeof data;
 export default data

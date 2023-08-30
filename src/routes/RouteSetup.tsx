@@ -8,7 +8,7 @@ import Home from '@pages/homes/Home';
 
 /* Route Setup */
 import RouteProduct from "./RouteProduct";
-
+import RouteUser from "./RouteUser";
 export default function RouteSetup() {
   return (
     <BrowserRouter>
@@ -17,9 +17,11 @@ export default function RouteSetup() {
             <Route path="/" element={<Home></Home>}>
               <Route path="about" element={Lazy(() => import("@components/Test"))()}></Route>
               <Route path="infor" element={<>Thông Tin</>}></Route>
+              {/* Products */}
               {RouteProduct}
             </Route>
-            <Route path="/google" element={<>Thông Tin</>}></Route>
+             {/* Users */}
+            {RouteUser}
         </Routes>
     </BrowserRouter>
   )
