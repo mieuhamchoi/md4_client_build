@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.headers = {
   "Content-Type": "application/json",
-  Accept: "application/json",
+  "Accept": "application/json",
   "Cache-Control": "no-cache, no-store, must-revalidate",
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Credentials": true,
