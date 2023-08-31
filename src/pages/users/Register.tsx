@@ -1,14 +1,26 @@
-import React, { FormEvent, memo } from 'react'
+import React, { FormEvent, memo, useState } from 'react'
 import './user.scss'
 import { useTranslation } from 'react-i18next'
 import DropDown from '@/components/DropDown'
 import api from '@services/apis'
-
+import Loading from './components/Loading'
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, message, Modal } from 'antd';
 const Register = () => {
+    const [load, setLoad] = useState(false);
+    const antIcon = (
+        <LoadingOutlined
+          style={{
+            fontSize: 24,
+          }}
+          spin
+        />
+      );
     const {t} = useTranslation();
 
     async function register(event: FormEvent) {
         event.preventDefault();
+        if(load) return
         let newUser = {
             email: (event.target as any).email.value,
             userName: (event.target as any).userName.value,
@@ -16,9 +28,20 @@ const Register = () => {
             firstName: (event.target as any).firstName.value,
             lastName: (event.target as any).lastName.value,
         }
+        setLoad(true)
         let result = await api.userApi.register(newUser);
-        
-        console.log("newUser", result)
+        setLoad(false)
+        if(result.status != 200) {
+            Modal.confirm({
+                content: result.data.message,
+                okText: "thử lại"
+            })
+        }else {
+            Modal.success({
+                content: result.data.message,
+                okText: "login"
+            })
+        }
     }
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -157,12 +180,17 @@ const Register = () => {
                                     </label>
                                 </div>
                             </div>
+                            {
+                                load && <Loading/>
+                            }
                             <button
                                 type="submit"
-                                style={{backgroundColor: 'red'}}
-                                className=" w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                className={`${load && 'active'} btn_submit w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
                             >
                                 Create an account
+                                <div className='btn_loading'>
+                                    <Spin indicator={antIcon} />
+                                </div>
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Already have an account?{" "}
